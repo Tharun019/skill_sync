@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify, render_template
 from model.cyclone import chatbot_response
 from model.resume_analyzer import analyze_resume, format_report_as_html
@@ -54,5 +55,5 @@ def health():
     return jsonify({"status": "ok", "bot": bot_name})
 
 if __name__ == "__main__":
-    port = 5000
-    app.run(debug=True, port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
